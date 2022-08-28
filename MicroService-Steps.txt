@@ -1,0 +1,69 @@
+MicroService Steps
+==================
+
+1. Create multiple independent services
+2. Call One service from Another one [based on requirement]
+	1. Call Using Rest-Template Bean
+	2. Call Using WebClient Bean
+
+
+Create Rest Template Bean
+-------------------------
+@Bean
+public RestTemplate userDefinedMethodName() {
+    return new RestTemplate();
+}
+
+Create WebClient Bean
+---------------------
+@Bean
+public WebClient.Builder userDefinedBuilder(){
+    return WebClient.builder();
+}
+
+
+Using Rest Template
+-------------------
+Call using rest template as show below-
+
+List<Employee> emps = restTemp.getForObject("http://localhost:8082/movie-info/findAll", Employee.class);
+
+
+Using WebClient
+---------------
+
+ResponseEntity<List<Movie>> movies = builder.build().get()
+        .uri("http://localhost:8082/movie-info/findAll").retrieve().toEntityList(Movie.class).block();
+
+Remove URL Hardcoding
+----------------------
+To remove URL hard wiring, Eureka server is user, Create One more service which will act as Eureka Server
+we need to annotate Eureka Main class with @EnableEurekaServer annotation, 
+And also make it @SpringBootApplication
+
+This will work as Eureka Server, to register all URL of different micro services
+
+In all Micro Services add Eureka dependency in pom.xml, And provide all micro service name using
+spring.application.name property=Movie-Info-Service
+Default port of Eureka is 8761
+
+Replace All Url Hardcoding with Micro Service Registered Name
+-------------------------------------------------------------
+
+restTemp.getForObject("http://Movie-Info-Service/movie-info/findAll", Employee.class);
+
+builder.build().get()
+        .uri("http://Movie-Info-Service/movie-info/findAll").retrieve().toEntityList(Movie.class).block();
+
+
+Now while calling other micro service, Eureka will provide registered address and port of that service
+
+
+
+
+
+
+
+
+
+
