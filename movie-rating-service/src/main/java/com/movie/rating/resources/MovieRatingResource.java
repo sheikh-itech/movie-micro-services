@@ -30,7 +30,10 @@ public class MovieRatingResource {
 			//movieCatalog.saveAll(init());
 			flag = false;
 		}
-		
+		//To Check Hystrix Work
+		try {
+			//Thread.currentThread().wait(4000);
+		}catch(Exception e) {}
 		Rating rating = null;
 		
 		Optional<Rating> list = movieCatalog.findById(id);

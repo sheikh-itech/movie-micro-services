@@ -21,9 +21,30 @@
   
   <dependencies>
   
+  	<!-- Reactive web applications [WebClient] -->
     <dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-webflux</artifactId>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-hystrix -->
+		<dependency>
+	    <groupId>org.springframework.cloud</groupId>
+	    <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+	    <version>2.2.10.RELEASE</version>
+	</dependency>
+	
+	<!-- For Hystrix DashBoard, Actuators also required-->
+	<dependency>
+	    <groupId>org.springframework.cloud</groupId>
+	    <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+	    <version>2.2.10.RELEASE</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-actuator</artifactId>
 	</dependency>
 	
 	<dependency>
