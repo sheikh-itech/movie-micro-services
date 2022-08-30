@@ -41,4 +41,36 @@ spring.cloud.config.server.git.uri.password=*****
 
     http://localhost:8888/application-remote/remote
 
-		
+
+
+Access/Use Config Properties Using Client
+=========================================		
+
+1. Add below dependency to access remote properties
+
+	<dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-config</artifactId>
+	  <spring-cloud.version>2021.0.3</spring-cloud.version>
+    </dependency>
+
+	<dependencyManagement>
+	    <dependencies>
+	      <dependency>
+	        <groupId>org.springframework.cloud</groupId>
+	        <artifactId>spring-cloud-dependencies</artifactId>
+	        <version>${spring-cloud.version}</version>
+	        <type>pom</type>
+	        <scope>import</scope>
+	      </dependency>
+	    </dependencies>
+	</dependencyManagement>
+
+2. In application.properties file, specify remote git URL and application file name
+
+	#Configuration from cloud server
+	spring.config.import=configserver:http://localhost:8888
+	#File in git repository
+	spring.application.name=application-remote
+
+This will now refer config properties from Git Repo

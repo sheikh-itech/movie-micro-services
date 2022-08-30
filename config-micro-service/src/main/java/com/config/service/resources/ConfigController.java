@@ -39,16 +39,20 @@ public class ConfigController {
 	private Environment env;
 	
 	@RequestMapping(value="/config")
-	public void startConfiguration() {
+	public String startConfiguration() {
 		
 		if(startMyConfiguration) {
-			System.out.println(configGreeting);
-			System.out.println(configGreetingPerson);
-			System.out.println(dbConfig);
-			System.out.println(undefinedProperty);
-			System.out.println(myList);
-			System.out.println(databaseConfig);
+			
+			  System.out.println(configGreeting); 
+			  System.out.println(configGreetingPerson);
+			  System.out.println(dbConfig); 
+			  System.out.println(undefinedProperty);
+			  System.out.println(myList); 
+			  System.out.println(databaseConfig);
+			 
 		}
+		
+		return configGreeting+configGreetingPerson+dbConfig+databaseConfig;
 	}
 	
 	@RequestMapping(value="/env")
