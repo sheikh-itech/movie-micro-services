@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.config.service.config.DatabaseConfig;
 
 @RestController
+@RefreshScope	//All the beans/property refresh, without restart using Actuator
 public class ConfigController {
 
 	@Value("${my.configuration.start}")
@@ -52,7 +54,7 @@ public class ConfigController {
 			 
 		}
 		
-		return configGreeting+configGreetingPerson+dbConfig+databaseConfig;
+		return configGreeting+", "+configGreetingPerson+", "+dbConfig+", "+databaseConfig;
 	}
 	
 	@RequestMapping(value="/env")
