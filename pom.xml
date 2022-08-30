@@ -17,19 +17,13 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	
-  <properties>
-   	<java.version>11</java.version>
-	<!-- Maven Configuration Problem ->Add below line -->
-	<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
-	
+
   <modules>
     <module>movie-info-service</module>
     <module>movie-catalog-service</module>
     <module>movie-rating-service</module>
     <module>eureka-discovery-server</module>
-    <module>config-demo-javabrain</module>
+    <module>config-micro-service</module>
+	<module>spring-cloud-config-server</module>
   </modules>
 </project>

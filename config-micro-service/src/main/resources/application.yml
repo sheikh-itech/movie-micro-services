@@ -1,0 +1,26 @@
+my:
+  configuration:
+    db:
+      detail: '{conString:''http://127.0.0.1/abc'', username:''sheikh'', password:
+        ''*****''}'
+    database:
+      password: '*****'
+      url: http://127.0.0.1/abc
+      username: sheikh
+    list: 1,2,3,4,5
+    start: 'true'
+    greeting:
+      nodeValue: Hello Dear
+      person: ${my.configuration.greeting} Arham
+spring:
+  application:
+    name: config-service
+  data:
+    mongodb:
+      port: '27017'
+      host: 127.0.0.1
+      database: MovieService
+server:
+  servlet:
+    context-path: /config-service
+  port: '8085'
