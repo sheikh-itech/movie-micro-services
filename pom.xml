@@ -25,5 +25,6 @@
     <module>eureka-discovery-server</module>
     <module>config-micro-service</module>
 	<module>spring-cloud-config-server</module>
+	<module>spring-jpa-service</module>
   </modules>
 </project>
