@@ -13,5 +13,4 @@ public class SpringJpaServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringJpaServiceApplication.class, args);
 	}
-
 }

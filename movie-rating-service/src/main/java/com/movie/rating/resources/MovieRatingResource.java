@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jpa.service.services.RatingService;
 import com.movie.rating.beans.Rating;
 import com.movie.rating.repositories.MovieRatingRepository;
 
@@ -20,14 +21,24 @@ import com.movie.rating.repositories.MovieRatingRepository;
 public class MovieRatingResource {
 
 	@Autowired
-	private MovieRatingRepository movieCatalog;
+	private RatingService ratingService;
+	@Autowired
+	private MovieRatingRepository movieCatalogRepo;
 	private boolean flag = true;
 	
 	@RequestMapping(value="find", method = RequestMethod.GET)
 	public ResponseEntity<Rating> getRating(@PathParam("id") int id) {
 		
 		if(flag) {
+			
 			//movieCatalog.saveAll(init());
+			List<Rating> rtngs = init();
+			List<com.jpa.service.beans.Rating> ratings = new ArrayList<>();
+			
+			rtngs.forEach(item->ratings.add(new com.jpa.service.beans.Rating(
+					item.getId(), item.getName(), item.getRating(), item.getRatingDesc())));
+			
+			ratingService.saveAll(ratings);
 			flag = false;
 		}
 		//To Check Hystrix Work
@@ -36,7 +47,7 @@ public class MovieRatingResource {
 		}catch(Exception e) {}
 		Rating rating = null;
 		
-		Optional<Rating> list = movieCatalog.findById(id);
+		Optional<Rating> list = movieCatalogRepo.findById(id);
 		if(list.isPresent())
 			rating = list.get();
 		
@@ -46,7 +57,7 @@ public class MovieRatingResource {
 	@RequestMapping(value="rating", method = RequestMethod.GET)
 	public ResponseEntity<List<Rating>> getMoviess() {
 		
-		return new ResponseEntity<List<Rating>>(movieCatalog.findAll(), HttpStatus.FOUND);
+		return new ResponseEntity<List<Rating>>(movieCatalogRepo.findAll(), HttpStatus.FOUND);
 	}
 	
 	private List<Rating> init() {
