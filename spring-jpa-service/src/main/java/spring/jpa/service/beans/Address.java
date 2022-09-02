@@ -1,9 +1,11 @@
-package com.starter.jpa.service.beans;
+package spring.jpa.service.beans;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -12,13 +14,17 @@ import javax.persistence.Table;
 public class Address {
 
 	@Id
-	@SequenceGenerator(name="addressSeq", sequenceName="addressSeq", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="addressSeq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="addr")
+	@SequenceGenerator(name="addr", sequenceName="addressSeq", allocationSize=1)
 	private int id;
 	private String type;
 	private String landmark;
 	private String address;
+	private String state;
 	private int zipcode;
+	@OneToOne
+    @PrimaryKeyJoinColumn(name = "comp_id")
+	private Company company;
 	
 	public Address() {		}
 	
@@ -68,6 +74,14 @@ public class Address {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	@Override

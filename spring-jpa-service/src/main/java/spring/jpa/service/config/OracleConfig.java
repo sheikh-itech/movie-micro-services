@@ -3,10 +3,12 @@ package spring.jpa.service.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.annotation.Order;
 
 @Configuration
 @PropertySource({ "classpath:oracle-db.properties" })
 @ConfigurationProperties("database")
+@Order(1)
 public class OracleConfig {
 
 	private String driver;

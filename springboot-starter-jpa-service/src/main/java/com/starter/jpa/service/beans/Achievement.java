@@ -1,7 +1,5 @@
 package com.starter.jpa.service.beans;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,11 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "Achievement")
-public class Achievement implements Serializable {
+//@Entity
+//@Table(name = "Achievement")
+public class Achievement {
 
-	@Id
+	//@Id
 	//@GeneratedValue(strategy=GenerationType.SEQUENCE ,generator="achievement")
 	//@SequenceGenerator(name="achievement", sequenceName="achievementSeq", allocationSize=1)
 	private int id;

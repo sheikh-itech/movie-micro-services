@@ -1,17 +1,15 @@
 package com.starter.jpa.service.beans;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
-@Entity
-public class Department implements Serializable {
+//@Entity
+public class Department {
 
-	@Id
+	//@Id
     //@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="department")
 	//@SequenceGenerator(name="department", sequenceName="departmentSeq", allocationSize=1)
 	private int deptid;

@@ -6,6 +6,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -14,8 +16,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableTransactionManagement	//enables annotation-driven transaction management 
-public class JPAConfig {
+@EnableTransactionManagement	//enables annotation-driven transaction management
+@Order(2)
+public class PersistenceJPAConfig {
 
 	@Autowired
 	private OracleConfig config;
@@ -42,7 +45,7 @@ public class JPAConfig {
 	    final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 	    entityManagerFactoryBean.setDataSource(dataSource());
 	    entityManagerFactoryBean.setPackagesToScan(new String[] {
-	        "spring.jpa.service"
+	        "spring.jpa.service.beans"
 	    });
 	
 	    final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -51,6 +54,11 @@ public class JPAConfig {
 	
 	    return entityManagerFactoryBean;
 	}
+	
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
 	 
 	private final Properties additionalProperties() {
 		

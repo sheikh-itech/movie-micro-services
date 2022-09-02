@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.starter.jpa.service.beans.Rating;
 import com.starter.jpa.service.repositories.RatingRepository;
 
-@RestController
-@RequestMapping("rating")
+//@RestController
+//@RequestMapping("rating")
 public class RatingResource {
 
-	@Autowired 
+	//@Autowired 
 	private RatingRepository ratingRepo;
 	
-	@RequestMapping("fetchAll")
+	//@RequestMapping("fetchAll")
 	public Iterable<Rating> getAllRatings() {
 
 		return ratingRepo.findAll();

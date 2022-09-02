@@ -1,83 +1,137 @@
 package com.starter.jpa.service.resources;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.starter.jpa.service.beans.Achievement;
-import com.starter.jpa.service.beans.Address;
 import com.starter.jpa.service.beans.Employee;
-import com.starter.jpa.service.beans.Performance;
+import com.starter.jpa.service.beans.Response;
 import com.starter.jpa.service.repositories.EmployeeRepository;
+
 
 @RestController
 @RequestMapping("employee")
 public class EmployeeResource {
 
 	@Autowired
-	private EmployeeRepository empRepo;
-	@Autowired
-	private JpaTransactionManager manager;
+	private EmployeeRepository employeeRepo;
 	
-	@RequestMapping("achievementWise")
-	public ResponseEntity<List<Employee>> getEmpDeptwise() {
+	@RequestMapping(value="save", method = RequestMethod.POST)
+	public ResponseEntity<Response> saveEmployee(@RequestBody Employee employee) {
 		
-		List<Employee> emps = null;//empRepo.findByAchievement();
+		Response response = new Response(HttpStatus.CREATED.toString(), "Employee info saved...", employeeRepo.save(employee));
 		
-		return new ResponseEntity<List<Employee>>(emps, HttpStatus.FOUND);
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
 	}
 	
-	@RequestMapping("fetchAll")
-	public ResponseEntity<List<Employee>> fetchAllEmp() {
+	@RequestMapping(value="saveAll", method = RequestMethod.POST)
+	public ResponseEntity<Response> saveEmployees(@RequestBody List<Employee> employees) {
 		
-		List<Employee> emps = new ArrayList<>();
-		Iterable<Employee> empsItr = empRepo.findAll();
-		empsItr.forEach(action->emps.add(action));
+		Response response = new Response(HttpStatus.CREATED.toString(), "Employees info saved...", employeeRepo.saveAll(employees));
 		
-		return new ResponseEntity<List<Employee>>(emps, HttpStatus.OK);
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
 	}
 	
-	@RequestMapping("initialize")
-	public void init() {
+	@RequestMapping(value="name", method = RequestMethod.GET)
+	public ResponseEntity<Response> findByName(@RequestParam("name") String name) {
 		
-		List<Employee> emps = new ArrayList<>();
-		Employee e1 = new Employee("Arham", new Address(1, "Temporary", "Sunka Chauraha", "Sunka Chauraha", 480007));
-		Employee e2 = new Employee("Hapheej", new Address(2, "Temporary", "Sunka Chauraha", "Sunka Chauraha", 480007));
-		Employee e3 = new Employee("Aastana", new Address(3, "Temporary", "Sunka Chauraha", "Sunka Chauraha", 480007));
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee info by name", employeeRepo.findByName(name));
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="nameContains", method = RequestMethod.GET)
+	public ResponseEntity<Response> findByNameContaining(@RequestParam("name") String name) {
 		
-		List<Achievement> ach = new ArrayList<>();
-		Achievement a1 = new Achievement(1, "Annual Recognition", "Precious award", 7.6f);
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee info by contains name", employeeRepo.findByNameContaining(name));
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="nameAndMobile", method = RequestMethod.GET)
+	public ResponseEntity<Response> findByNameAndMobile(@RequestParam("name") String name, @RequestParam("mobile") long mobile) {
 		
-
-		List<Performance> permnce = new ArrayList<>();
-		Performance p1 = new Performance(101, "Annual", 8.2f, 22.0f, "Performed best in annual summit");
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee info by name and mobile", employeeRepo.findByNameAndMobile(name, mobile));
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="empTypeNotNull", method = RequestMethod.GET)
+	public ResponseEntity<Response> findByEmpTypeNotNull() {
 		
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee info by employeeType Not Null", employeeRepo.findByEmpTypeNotNull());
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="empType", method = RequestMethod.GET)
+	public ResponseEntity<Response> findByEmpType(@RequestParam("empType") String empType) {
 		
-		//empRepo.saveAll(emps);
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee info byEmpType", employeeRepo.findByEmpType(empType));
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="nameAndEmpTypeNotNull", method = RequestMethod.GET)
+	public ResponseEntity<Response> findByNameAndEmpTypeNotNull(@RequestParam("name") String name) {
 		
-		EntityManagerFactory a = manager.getEntityManagerFactory();
-		EntityManager b = a.createEntityManager();
-		//b.getTransaction().begin();
-		b.persist(p1);
-		b.persist(a1);
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee info byNameAndEmpTypeNotNull", employeeRepo.findByNameAndEmpTypeNotNull(name));
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="guardianName", method = RequestMethod.GET)
+	public ResponseEntity<Response> findByGuardianName(@RequestParam("guardianName") String name) {
 		
-		ach.add(a1);permnce.add(p1);
-		e1.setPerformance(permnce);e2.setPerformance(permnce);e3.setPerformance(permnce);
-		//e1.setAchievement(ach);e2.setAchievement(ach);e3.setAchievement(ach);
-		emps.add(e1);emps.add(e2);emps.add(e3);
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee info byGuardianName", employeeRepo.findByGuardianName(name));
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	// Query/JPQL
+	@RequestMapping(value="avgSalary", method = RequestMethod.GET)
+	public ResponseEntity<Response> findByAverageSalary() {
 		
-		b.persist(emps);
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee info byAverageSalary", employeeRepo.averageSalary());
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	// Native Query
+	@RequestMapping(value="avgSalaryNative", method = RequestMethod.GET)
+	public ResponseEntity<Response> findByNativeAverageSalary() {
 		
-		//b.getTransaction().commit();
-		b.close();
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee info byNativeAverageSalary", employeeRepo.nativeAverageSalary());
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	// Native Named Query	[If number of binding/input parameter are more]
+	@RequestMapping(value="avgSalaryNativeNamed", method = RequestMethod.GET)
+	public ResponseEntity<Response> findByNativeNamedAverageSalary(@RequestParam("name") String name, @RequestParam("mobile") long mobile) {
+		
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee info byNativeNamedAverageSalary", employeeRepo.nativeNamedAverageSalary(name, mobile));
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	
+	//Update Section
+	
+	//Modifying/Updating Transactional method
+	@RequestMapping(value="updateSalary", method = RequestMethod.POST)
+	public ResponseEntity<Response> updateSalary(@RequestParam("id") int id, @RequestParam("salary") float salary) {
+		
+		employeeRepo.updateSalary(id, salary);
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee salary updated...", new String("updated salary: "+salary));
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
 	}
 }

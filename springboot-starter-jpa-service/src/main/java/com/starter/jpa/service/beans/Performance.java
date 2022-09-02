@@ -7,13 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "Performance")
+//@Entity
+//@Table(name = "Performance")
 public class Performance {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="performance")
-	@SequenceGenerator(name="performance", sequenceName="performanceSeq", allocationSize=1)
+	//@Id
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="performance")
+	//@SequenceGenerator(name="performance", sequenceName="performanceSeq", allocationSize=1)
 	private int id;
 	private String type;
 	private float grade;
