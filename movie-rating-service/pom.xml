@@ -58,7 +58,7 @@
 	
 	<dependency>
 	    <groupId>com.jpa.service</groupId>
-	    <artifactId>spring-jpa-service</artifactId>
+	    <artifactId>springboot-starter-jpa-service</artifactId>
 	    <version>0.0.1-SNAPSHOT</version>
 	</dependency>
 	
