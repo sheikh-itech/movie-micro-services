@@ -1,9 +1,11 @@
 package com.starter.jpa.service.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,6 +21,10 @@ public class Address {
 	private String landmark;
 	private String address;
 	private int zipcode;
+	
+	//Bi-Directional mapping
+	@OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
+	private Employee employee;
 	
 	public Address() {		}
 	

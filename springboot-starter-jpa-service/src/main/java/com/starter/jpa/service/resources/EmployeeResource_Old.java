@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.starter.jpa.service.beans.Achievement;
 import com.starter.jpa.service.beans.Address;
 import com.starter.jpa.service.beans.Employee;
-import com.starter.jpa.service.beans.Performance;
 import com.starter.jpa.service.repositories.EmployeeRepository;
 
 //@RestController
@@ -58,8 +57,8 @@ public class EmployeeResource_Old {
 		Achievement a1 = new Achievement(1, "Annual Recognition", "Precious award", 7.6f);
 		
 
-		List<Performance> permnce = new ArrayList<>();
-		Performance p1 = new Performance(101, "Annual", 8.2f, 22.0f, "Performed best in annual summit");
+		//List<Performance> permnce = new ArrayList<>();
+		//Performance p1 = new Performance(101, "Annual", 8.2f, 22.0f, "Performed best in annual summit");
 		
 		
 		//empRepo.saveAll(emps);
@@ -67,10 +66,10 @@ public class EmployeeResource_Old {
 		EntityManagerFactory a = manager.getEntityManagerFactory();
 		EntityManager b = a.createEntityManager();
 		//b.getTransaction().begin();
-		b.persist(p1);
+		//b.persist(p1);
 		b.persist(a1);
 		
-		ach.add(a1);permnce.add(p1);
+		//ach.add(a1);permnce.add(p1);
 		//e1.setPerformance(permnce);e2.setPerformance(permnce);e3.setPerformance(permnce);
 		//e1.setAchievement(ach);e2.setAchievement(ach);e3.setAchievement(ach);
 		emps.add(e1);emps.add(e2);emps.add(e3);

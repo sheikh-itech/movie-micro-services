@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ public class EmployeeResource {
 	@Autowired
 	private EmployeeRepository employeeRepo;
 	
-	@RequestMapping(value="save", method = RequestMethod.POST)
+	@RequestMapping(value="save", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public ResponseEntity<Response> saveEmployee(@RequestBody Employee employee) {
 		
 		Response response = new Response(HttpStatus.CREATED.toString(), "Employee info saved...", employeeRepo.save(employee));

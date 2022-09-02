@@ -1,40 +1,31 @@
 package com.starter.jpa.service.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "Performance")
+@Entity
+@Table(name="performance")
 public class Performance {
 
-	//@Id
-	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="performance")
-	//@SequenceGenerator(name="performance", sequenceName="performanceSeq", allocationSize=1)
+	@Id
+	@SequenceGenerator(name="EmpPerfSeq", sequenceName="EmpPerfSeq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EmpPerfSeq")
 	private int id;
 	private String type;
 	private float grade;
 	private float bonus;
-	private String desc;
-	
-	public Performance() {		}
-	
-	public Performance(int id, String type, float grade, float bonus, String desc) {
-		this.id = id;
-		this.type = type;
-		this.grade = grade;
-		this.bonus = bonus;
-		this.desc = desc;
-	}
-	
-	@Override
-	public String toString() {
-		return "Performance{ type=" + type + ", grade=" + grade + ", bonus=" + bonus + ", desc=" + desc + " }";
-	}
-	
+	private String description;
+
+	@ManyToOne(targetEntity = Employee.class, cascade = CascadeType.ALL)
+	private Employee employee;
+
 	public int getId() {
 		return id;
 	}
@@ -59,10 +50,16 @@ public class Performance {
 	public void setBonus(float bonus) {
 		this.bonus = bonus;
 	}
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 }

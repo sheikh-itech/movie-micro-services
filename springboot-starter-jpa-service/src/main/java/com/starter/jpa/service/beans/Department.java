@@ -5,13 +5,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-//@Entity
+@Entity
+@Table(name="Department")
 public class Department {
 
-	//@Id
-    //@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="department")
-	//@SequenceGenerator(name="department", sequenceName="departmentSeq", allocationSize=1)
+	@Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="department")
+	@SequenceGenerator(name="department", sequenceName="departmentSeq", allocationSize=1)
 	private int deptid;
 	private String deptName;
 	private String deptType;
