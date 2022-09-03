@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jpa.service.services.RatingService;
+import com.starter.jpa.service.services.RatingService;
 import com.movie.rating.beans.Rating;
 import com.movie.rating.repositories.MovieRatingRepository;
 
@@ -33,9 +33,9 @@ public class MovieRatingResource {
 			
 			//movieCatalog.saveAll(init());
 			List<Rating> rtngs = init();
-			List<com.jpa.service.beans.Rating> ratings = new ArrayList<>();
+			List<com.starter.jpa.service.beans.Rating> ratings = new ArrayList<>();
 			
-			rtngs.forEach(item->ratings.add(new com.jpa.service.beans.Rating(
+			rtngs.forEach(item->ratings.add(new com.starter.jpa.service.beans.Rating(
 					item.getId(), item.getName(), item.getRating(), item.getRatingDesc())));
 			
 			ratingService.saveAll(ratings);

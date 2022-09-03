@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "Customer")
+//@Entity
+//@Table(name = "Customer")
 public class Customer {
 
 	@Id

@@ -26,6 +26,6 @@
     <module>config-micro-service</module>
 	<module>spring-cloud-config-server</module>
 	<module>springboot-starter-jpa-service</module>
-    <module>spring-jpa-service</module>
+    <module>jpa-hibernate-service</module>
   </modules>
 </project>

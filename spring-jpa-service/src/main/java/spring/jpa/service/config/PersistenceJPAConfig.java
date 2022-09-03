@@ -1,5 +1,5 @@
 package spring.jpa.service.config;
-
+/*
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -15,9 +15,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Configuration
-@EnableTransactionManagement	//enables annotation-driven transaction management
-@Order(2)
+//@Configuration
+//@EnableTransactionManagement	//enables annotation-driven transaction management
+//@Order(2)
 public class PersistenceJPAConfig {
 
 	@Autowired
@@ -71,3 +71,4 @@ public class PersistenceJPAConfig {
 	 	return hibernateProperties;
 	}
 }
+*/

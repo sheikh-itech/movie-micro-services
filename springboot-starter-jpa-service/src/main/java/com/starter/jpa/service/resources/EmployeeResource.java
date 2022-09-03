@@ -201,14 +201,14 @@ public class EmployeeResource {
 	@RequestMapping(value="paginationEmp/{page}", method = RequestMethod.GET)
 	public ResponseEntity<Response> actualPagination(@PathVariable(value="page", required=false) Integer page) {
 		
-		String requestUri = scope.getRequestURI();
+		String requestUri = null;
 
 		Pageable current = PageRequest.of(page, 2);
 		
 		List<Employee> pageEmployees = employeeRepo.findAll(current).getContent();
 		
 		if(!pageEmployees.isEmpty()) {
-			requestUri = requestUri.replaceAll("/[0-9]{1,2}", "/")+(page+1);
+			requestUri = scope.getRequestURI().replaceAll("/[0-9]{1,2}", "/")+(page+1);
 		}
 		
 		Response response = new Response(HttpStatus.CREATED.toString(), 

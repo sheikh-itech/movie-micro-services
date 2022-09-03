@@ -1,14 +1,16 @@
 package spring.jpa.service.config;
-
+/*
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.annotation.Order;
 
-@Configuration
-@PropertySource({ "classpath:oracle-db.properties" })
-@ConfigurationProperties("database")
-@Order(1)
+//@Configuration
+//@PropertySource({ "classpath:oracle-db.properties" })
+//@ConfigurationProperties("database")
+//@Order(1)
+//@Profile("oracle")
 public class OracleConfig {
 
 	private String driver;
@@ -76,3 +78,4 @@ public class OracleConfig {
 		this.queryCache = queryCache;
 	}
 }
+*/

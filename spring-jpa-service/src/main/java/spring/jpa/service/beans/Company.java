@@ -13,8 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "Company")
+//@Entity
+//@Table(name = "Company")
 public class Company {
 
 	@Id
@@ -25,11 +25,11 @@ public class Company {
 	private String desc;
 	private long contact;
 	
-	@OneToOne(mappedBy="Company", fetch=FetchType.EAGER)
+	//@OneToOne(mappedBy="Company", fetch=FetchType.EAGER)
 	//@JoinColumn(name = "id")
-	private Address address;
-	@OneToMany(targetEntity=Package.class, mappedBy="products", fetch=FetchType.EAGER)
-	private List<Package> products;
+	//private Address address;
+	//@OneToMany(targetEntity=Package.class, mappedBy="products", fetch=FetchType.EAGER)
+	//private List<Package> products;
 	
 	public Company() {		}
 	
@@ -64,22 +64,6 @@ public class Company {
 		this.desc = desc;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public List<Package> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Package> products) {
-		this.products = products;
-	}
-
 	public long getContact() {
 		return contact;
 	}
@@ -90,7 +74,7 @@ public class Company {
 
 	@Override
 	public String toString() {
-		return "Company{id: " + id + ", name: " + name + ", desc: " + desc + ", contact: " + contact + ", address: "
-				+ address + ", products: " + products + "}";
+		return "Company{id: " + id + ", name: " + name + ", desc: " + desc + ", contact: " + contact;
+			//+ ", address: " + address + ", products: " + products + "}";
 	}
 }

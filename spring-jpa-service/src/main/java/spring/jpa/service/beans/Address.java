@@ -4,9 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -14,18 +11,18 @@ import javax.persistence.Table;
 public class Address {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="addr")
-	@SequenceGenerator(name="addr", sequenceName="addressSeq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String type;
 	private String landmark;
 	private String address;
 	private String state;
 	private int zipcode;
+	/*
 	@OneToOne
     @PrimaryKeyJoinColumn(name = "comp_id")
 	private Company company;
-	
+	*/
 	public Address() {		}
 	
 	public Address(int id, String type, String landmark, String address, int zipcode) {
