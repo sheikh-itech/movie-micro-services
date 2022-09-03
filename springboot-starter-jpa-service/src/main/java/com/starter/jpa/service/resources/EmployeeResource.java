@@ -1,11 +1,18 @@
 package com.starter.jpa.service.resources;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +30,10 @@ public class EmployeeResource {
 
 	@Autowired
 	private EmployeeRepository employeeRepo;
+	
+	@Autowired
+	private HttpServletRequest scope;
+	
 	
 	@RequestMapping(value="save", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public ResponseEntity<Response> saveEmployee(@RequestBody Employee employee) {
@@ -135,4 +146,77 @@ public class EmployeeResource {
 				"Employee salary updated...", new String("updated salary: "+salary));
 		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
 	}
+	
+	
+	//Pagination Concept
+	
+	@RequestMapping(value="pagedEmp", method = RequestMethod.GET)
+	public ResponseEntity<Response> pagedEmployee() {
+		
+		Pageable firstPageWithTwoRecords = PageRequest.of(0, 2, Sort.by("mobile").ascending());
+		Pageable secondPageWithThreeRecords = PageRequest.of(1, 3);
+		
+		Pageable pageWithThreeRecords = PageRequest.of(0, 3, 
+				Sort.by("mobile").descending().and(Sort.by("name")));
+		
+		List<Employee> emps = employeeRepo.findAll(pageWithThreeRecords).getContent();
+		
+		System.out.println(emps);
+		
+		List<Employee> firstPagedData = employeeRepo.findAll(firstPageWithTwoRecords).getContent();
+		List<Employee> secondPagedData = employeeRepo.findAll(secondPageWithThreeRecords).getContent();
+		
+		Map<String, List<Employee>> map = new HashMap<String, List<Employee>>();
+		map.put("firstPagedData", firstPagedData);
+		map.put("secondPagedData", secondPagedData);
+		
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee paginated info...", map);
+
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="pagedEmps", method = RequestMethod.GET)
+	public ResponseEntity<Response> morePagination() {
+		
+		Map<String, Object> map = new HashMap<>();
+		Pageable firstPageWithTwoRecords = PageRequest.of(0, 5);
+		
+		Integer totalPages = employeeRepo.findAll(firstPageWithTwoRecords).getTotalPages();
+		Integer slice = employeeRepo.findAll(firstPageWithTwoRecords).getNumber();
+		Integer totalEmps = employeeRepo.findAll(firstPageWithTwoRecords).getNumberOfElements();
+		List<Employee> empIdLessThenTen = employeeRepo.findAll(firstPageWithTwoRecords).filter(predict->predict.getId()<10).toList();
+		
+		map.put("totalPages", totalPages);
+		map.put("slice", slice);
+		map.put("totalEmps", totalEmps);
+		map.put("empIdLessThenTen", empIdLessThenTen);
+		
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Employee pagination more...", map);
+		
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="paginationEmp/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Response> actualPagination(@PathVariable(value="page", required=false) Integer page) {
+		
+		String requestUri = scope.getRequestURI();
+
+		Pageable current = PageRequest.of(page, 2);
+		
+		List<Employee> pageEmployees = employeeRepo.findAll(current).getContent();
+		
+		if(!pageEmployees.isEmpty()) {
+			requestUri = requestUri.replaceAll("/[0-9]{1,2}", "/")+(page+1);
+		}
+		
+		Response response = new Response(HttpStatus.CREATED.toString(), 
+				"Page-"+page+" employees...", pageEmployees);
+		
+		response.setNextPage(requestUri);
+		
+		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
+	}
+	
 }

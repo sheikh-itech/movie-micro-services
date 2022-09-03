@@ -45,6 +45,15 @@
 	      <artifactId>spring-boot-starter-test</artifactId>
 	      <!-- <scope>test</scope> -->
 	    </dependency>
+	    
+	    <!-- For Writing Custom Mapper of Hibernate 5 based in CommonConfig -->
+		<!--
+		<dependency>
+		    <groupId>com.fasterxml.jackson.datatype</groupId>
+		    <artifactId>jackson-datatype-hibernate5</artifactId>
+		</dependency>
+		-->
+		
 	  </dependencies>
 	
 	  <build>
