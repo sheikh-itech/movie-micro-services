@@ -1,4 +1,4 @@
-package spring.jpa.service.beans;
+package hibernate.jpa.service.beans;
 
 public enum Rating {
 	

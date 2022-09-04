@@ -1,4 +1,4 @@
-package spring.jpa.service.config;
+package hibernate.jpa.service.config;
 /*
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;

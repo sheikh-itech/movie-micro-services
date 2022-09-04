@@ -1,34 +1,34 @@
-package spring.jpa.service.beans;
+package hibernate.jpa.service.beans;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-public class DeliveryAgent {
+//@Entity
+//@Table(name = "Customer")
+public class Customer {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DeliveryGen")
-	@SequenceGenerator(name = "DeliveryGen", sequenceName = "DeliverySeq", initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGen")
+	@SequenceGenerator(name = "seqGen", sequenceName = "CustomerSeq", initialValue = 1)
 	private int id;
 	private String firstName;
 	private String lastName;
 	private long mobile;
-	private String status;
-	private float rating;
 	
 	private Address address;
 
-	public DeliveryAgent() {	}
+	public Customer() {		}
 	
-	public DeliveryAgent(int id, String firstName, String lastName, long mobile, String status, float rating) {
+	public Customer(int id, String firstName, String lastName, long mobile) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mobile = mobile;
-		this.status = status;
-		this.rating = rating;
 	}
 
 	public int getId() {
@@ -63,22 +63,6 @@ public class DeliveryAgent {
 		this.mobile = mobile;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public float getRating() {
-		return rating;
-	}
-
-	public void setRating(float rating) {
-		this.rating = rating;
-	}
-
 	public Address getAddress() {
 		return address;
 	}
@@ -89,7 +73,7 @@ public class DeliveryAgent {
 
 	@Override
 	public String toString() {
-		return "DeliveryAgent{id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", mobile: " + mobile
-				+ ", status: " + status + ", rating: " + rating + ", address: " + address + "}";
+		return "Customer{id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", mobile: " + mobile
+				+ ", address: " + address + "}";
 	}
 }

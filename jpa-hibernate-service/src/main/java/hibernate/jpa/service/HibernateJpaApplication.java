@@ -1,14 +1,16 @@
-package spring.jpa.service;
+package hibernate.jpa.service;
+
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import spring.jpa.service.beans.Address;
-import spring.jpa.service.services.AddressService;
+import hibernate.jpa.service.beans.Address;
+import hibernate.jpa.service.services.AddressService;
 
-public class SpringJpaApplication 
+public class HibernateJpaApplication 
 {
 	private static AddressService addressService;
 	
@@ -30,10 +32,13 @@ public class SpringJpaApplication
     	address.setState("MP");
     	addressService.updateAddress(address);
     	
-    	
-    	
-    	
-    	
+    	List<Address> adrs = addressService.findAllAddress();
+    	System.out.println(adrs);
+    	adrs.clear();
+    	Address address1 = new Address("Tempo1", "Shyam Talkeej", "Narsinghpur", 222);
+    	adrs.add(address1);
+    	adrs.add(address);
+    	addressService.saveAllAddress(adrs);
     	
     	manager.close();
     	factory.close();

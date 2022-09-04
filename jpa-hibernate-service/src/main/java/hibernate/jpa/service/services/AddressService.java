@@ -1,11 +1,11 @@
-package spring.jpa.service.services;
+package hibernate.jpa.service.services;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import spring.jpa.service.beans.Address;
+import hibernate.jpa.service.beans.Address;
 
 public class AddressService {
 
@@ -27,7 +27,8 @@ public class AddressService {
 	public void saveAllAddress(List<Address> address) {
 		
 		transaction.begin();
-		manager.persist(address);
+		for(Address adr:address)
+			manager.persist(adr);
 		transaction.commit();
 	}
 	
@@ -35,7 +36,13 @@ public class AddressService {
 		
 		return manager.find(Address.class, id);
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public List<Address> findAllAddress() {
+		
+		return manager.createQuery("from Address").getResultList();
+	}
+
 	public void updateAddress(Address address) {
 		
 		transaction.begin();
@@ -48,6 +55,12 @@ public class AddressService {
 		addressOld.setType(address.getType());
 		addressOld.setZipcode(address.getZipcode());
 		
+		transaction.commit();
+	}
+	
+	public void deleteAddress(int id) {
+		transaction.begin();
+		manager.remove(manager.find(Address.class, id));
 		transaction.commit();
 	}
 }

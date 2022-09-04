@@ -1,4 +1,4 @@
-package spring.jpa.service.config;
+package hibernate.jpa.service.config;
 /*
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
