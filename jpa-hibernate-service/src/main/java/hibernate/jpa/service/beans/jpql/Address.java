@@ -1,4 +1,4 @@
-package hibernate.jpa.service.beans;
+package hibernate.jpa.service.beans.jpql;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

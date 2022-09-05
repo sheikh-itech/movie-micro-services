@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import hibernate.jpa.service.beans.Address;
+import hibernate.jpa.service.beans.jpql.Address;
 
 public class AddressService {
 

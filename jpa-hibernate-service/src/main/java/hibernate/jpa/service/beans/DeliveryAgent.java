@@ -5,6 +5,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import hibernate.jpa.service.beans.jpql.Address;
+
 public class DeliveryAgent {
 
 	@Id

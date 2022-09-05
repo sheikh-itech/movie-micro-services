@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import hibernate.jpa.service.beans.jpql.Address;
+
 //@Entity
 //@Table(name = "Customer")
 public class Customer {

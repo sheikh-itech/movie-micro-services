@@ -16,7 +16,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import hibernate.jpa.service.beans.Address;
+import hibernate.jpa.service.beans.jpql.Address;
 
 public class AddressServiceTest {
 
