@@ -27,5 +27,6 @@
 	<module>spring-cloud-config-server</module>
 	<module>springboot-starter-jpa-service</module>
     <module>jpa-hibernate-service</module>
+    <module>default-springboot-security</module>
   </modules>
 </project>
