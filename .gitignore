@@ -23,3 +23,11 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/.settings
+/jpa-hibernate-service/.settings
+/config-micro-service/.settings
+/eureka-discovery-server
+/movie-catalog-service/.settings
+/movie-info-service/.settings
+/movie-rating-service/.settings
+/.classpath
